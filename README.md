@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 ![Service Objects Logo](https://www.serviceobjects.com/wp-content/uploads/2021/05/SO-Logo-with-TM.gif "Service Objects Logo")
 
 # NV3 - Name Validation 3
@@ -31,3 +32,6 @@ https://sws.serviceobjects.com/NV3/ValidateName?FullName=&Prefix=&FirstName=&Mid
 #### Production Backup
 
 https://swsbackup.serviceobjects.com/NV3/ValidateName?FullName=&Prefix=&FirstName=&MiddleName=&LastName=&Suffix=&Options=&AuthID={AuthId}
+=======
+# name-validation-3
+>>>>>>> b92c213a636ae72051ae6d11b1eccde25f64e2a7
