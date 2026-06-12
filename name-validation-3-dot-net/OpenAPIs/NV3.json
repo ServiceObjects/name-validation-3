@@ -1,0 +1,434 @@
+{
+    "openapi": "3.0.4",
+    "info": {
+        "title": "DOTS Name Validation 3",
+        "description": "DOTS Name Validation 3 is a JSON/XML web service that provides information about a person’s name. With DOTS Name Validation 3, users can validate names, verify name accuracy, and help classify names.",
+        "contact": {
+            "name": "Service Objects, Inc.",
+            "url": "https://www.serviceobjects.com/",
+            "email": "support@serviceobjects.com"
+        },
+        "version": "v1"
+    },
+    "servers": [
+        {
+            "url": "/NV3"
+        }
+    ],
+    "paths": {
+        "/ValidateName": {
+            "get": {
+                "tags": [
+                    "ValidateName"
+                ],
+                "parameters": [
+                    {
+                        "name": "FullName",
+                        "in": "query",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "Prefix",
+                        "in": "query",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "FirstName",
+                        "in": "query",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "MiddleName",
+                        "in": "query",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "LastName",
+                        "in": "query",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "Suffix",
+                        "in": "query",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "Options",
+                        "in": "query",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "AuthID",
+                        "in": "query",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ValidateNameResponse"
+                                }
+                            },
+                            "application/xml": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ValidateNameResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "ValidateName"
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "allOf": [
+                                    {
+                                        "$ref": "#/components/schemas/ValidateNameInput"
+                                    }
+                                ]
+                            }
+                        },
+                        "text/json": {
+                            "schema": {
+                                "allOf": [
+                                    {
+                                        "$ref": "#/components/schemas/ValidateNameInput"
+                                    }
+                                ]
+                            }
+                        },
+                        "application/*+json": {
+                            "schema": {
+                                "allOf": [
+                                    {
+                                        "$ref": "#/components/schemas/ValidateNameInput"
+                                    }
+                                ]
+                            }
+                        },
+                        "application/xml": {
+                            "schema": {
+                                "allOf": [
+                                    {
+                                        "$ref": "#/components/schemas/ValidateNameInput"
+                                    }
+                                ]
+                            }
+                        },
+                        "text/xml": {
+                            "schema": {
+                                "allOf": [
+                                    {
+                                        "$ref": "#/components/schemas/ValidateNameInput"
+                                    }
+                                ]
+                            }
+                        },
+                        "application/*+xml": {
+                            "schema": {
+                                "allOf": [
+                                    {
+                                        "$ref": "#/components/schemas/ValidateNameInput"
+                                    }
+                                ]
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ValidateNameResponse"
+                                }
+                            },
+                            "application/xml": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ValidateNameResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "DebugClassification": {
+                "type": "object",
+                "properties": {
+                    "ruleFired": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "reasoning": {
+                        "type": "string",
+                        "nullable": true
+                    }
+                },
+                "additionalProperties": false
+            },
+            "DebugScores": {
+                "type": "object",
+                "properties": {
+                    "firstNameDictionaryScore": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "middleNameDictionaryScore": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "lastNameDictionaryScore": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "vulgarScore": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "bogusScore": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "celebrityScore": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "garbageScore": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "overallNameScore": {
+                        "type": "integer",
+                        "format": "int32"
+                    }
+                },
+                "additionalProperties": false
+            },
+            "NameInfo": {
+                "type": "object",
+                "properties": {
+                    "confidence": {
+                        "type": "number",
+                        "format": "double"
+                    },
+                    "parsedName": {
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/ParsedName"
+                            }
+                        ]
+                    }
+                },
+                "additionalProperties": false
+            },
+            "ParsedName": {
+                "type": "object",
+                "properties": {
+                    "prefix": {
+                        "type": "string"
+                    },
+                    "first": {
+                        "type": "string"
+                    },
+                    "middle": {
+                        "type": "string"
+                    },
+                    "last": {
+                        "type": "string"
+                    },
+                    "suffix": {
+                        "type": "string"
+                    }
+                },
+                "additionalProperties": false
+            },
+            "StatusDetails": {
+                "required": [
+                    "message"
+                ],
+                "type": "object",
+                "properties": {
+                    "message": {
+                        "type": "string"
+                    },
+                    "detail": {
+                        "type": "string",
+                        "nullable": true
+                    }
+                },
+                "additionalProperties": false
+            },
+            "ValidateNameInput": {
+                "required": [
+                    "authID"
+                ],
+                "type": "object",
+                "properties": {
+                    "fullName": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "prefix": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "firstName": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "middleName": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "lastName": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "suffix": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "options": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "authID": {
+                        "minLength": 1,
+                        "type": "string"
+                    }
+                },
+                "additionalProperties": false
+            },
+            "ValidateNameResponse": {
+                "required": [
+                    "status"
+                ],
+                "type": "object",
+                "properties": {
+                    "status": {
+                        "type": "string"
+                    },
+                    "nameResult": {
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/ValidateNameResult"
+                            }
+                        ],
+                        "nullable": true
+                    },
+                    "statusDetail": {
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/StatusDetails"
+                            }
+                        ],
+                        "nullable": true
+                    }
+                },
+                "additionalProperties": false
+            },
+            "ValidateNameResult": {
+                "required": [
+                    "textIn"
+                ],
+                "type": "object",
+                "properties": {
+                    "isValidName": {
+                        "type": "boolean"
+                    },
+                    "classification": {
+                        "type": "string"
+                    },
+                    "confidence": {
+                        "type": "number",
+                        "format": "double"
+                    },
+                    "textIn": {
+                        "type": "string"
+                    },
+                    "textOut": {
+                        "type": "string"
+                    },
+                    "parsedName": {
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/ParsedName"
+                            }
+                        ],
+                        "nullable": true
+                    },
+                    "possibleNames": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/NameInfo"
+                        },
+                        "nullable": true
+                    },
+                    "notes": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "warnings": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "firstNameFound": {
+                        "type": "boolean"
+                    },
+                    "isCommonFirstName": {
+                        "type": "boolean"
+                    },
+                    "lastNameFound": {
+                        "type": "boolean"
+                    },
+                    "isCommonLastName": {
+                        "type": "boolean"
+                    },
+                    "similarFirstNames": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "similarLastNames": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "relatedNames": {
+                        "type": "string",
+                        "nullable": true
+                    }
+                },
+                "additionalProperties": false
+            }
+        }
+    }
+}

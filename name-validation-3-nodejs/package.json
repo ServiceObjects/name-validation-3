@@ -1,0 +1,17 @@
+{
+  "name": "name-validation-3-nodejs",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "example": "node ../name-validation-3-nodejs-examples/validate_name_rest_sdk_example.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "dependencies": {
+    "axios": "^1.16.1"
+  }
+}
